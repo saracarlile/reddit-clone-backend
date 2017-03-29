@@ -4,6 +4,15 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
+var passport = require('passport');
+
+mongoose.connect('mongodb://localhost/news');
+
+require('./models/Posts');
+require('./models/Comments');
+require('./models/Users');
+require('./config/passport');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
@@ -14,11 +23,8 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-var mongoose = require('mongoose');
-require('./models/Posts');
-require('./models/Comments');
 
-mongoose.connect('mongodb://localhost/news');
+
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -27,6 +33,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(passport.initialize());
 
 app.use('/', index);
 app.use('/users', users);

@@ -1,0 +1,10 @@
+curl --data "title=Facebook&link=http://www.facebook.com" http://localhost:3000/posts
+
+curl --data "body=FacebookComment&author=AuthorName" http://localhost:3000/posts/58d56d40133578122047ce69/comments
+
+curl -X PUT http://localhost:3000/posts/58d56d40133578122047ce69/upvote
+
+curl -X PUT http://localhost:3000/posts/58d56d40133578122047ce69/upvote
+
+
+curl -X PUT http://localhost:3000/posts/58d56d40133578122047ce69/comments/58d56feb791f3d118c76da98/upvote
